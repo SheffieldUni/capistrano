@@ -141,7 +141,7 @@ namespace :deploy do
           directories_str = directories.map do |release|
             releases_path.join(release)
           end.join(" ")
-          execute :rm, '-rf', directories_str
+          try_sudo "rm -rf #{directories_str}"
         else
           info t(:no_old_releases, host: host.to_s, keep_releases: fetch(:keep_releases))
         end
